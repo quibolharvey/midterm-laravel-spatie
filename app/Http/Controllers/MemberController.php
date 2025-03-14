@@ -7,10 +7,17 @@ use App\Models\User; // Assuming 'User' model represents members
 
 class MemberController extends Controller
 {
-    public function index()
-    {
-        $members = User::all(); // Fetch all members
+    public function index(Request $request)
+{
+    $query = User::with('roles');
 
-        return view('member.index', compact('members'));
+    if ($request->has('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
+
+    $members = $query->paginate(10);
+
+    return view('member.index', compact('members'));
+}
+
 }

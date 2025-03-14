@@ -8,7 +8,7 @@
 
             <!-- Title -->
             <div class="flex flex-col items-center">
-                <h2 class="text-2xl font-bold text-blue-400 uppercase">Log in to</h2>
+                <h2 class="text-2xl font-bold text-blue-400 uppercase">Log in to BicepCurlFit</h2>
                 <p class="text-gray-400 text-sm">Enter your credentials to continue</p>
             </div>
 
