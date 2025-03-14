@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container mx-auto p-6">
-        <h2 class="text-blue-600 font-semibold text-2xl mb-4 text-center">Project List</h2>
+        <h2 class="text-blue-600 font-semibold text-2xl mb-4 text-center">Subscription Details</h2>
 
         @can('create-record')
             <div class="flex justify-end mb-3">
                 <a href="{{ route('projects.create') }}"
                     class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-all">
-                    + Create New Project
+                    + Add New Member
                 </a>
             </div>
         @endcan
@@ -19,9 +19,9 @@
                     <tr class="text-left">
                         <th class="px-4 py-3">ID</th>
                         <th class="px-4 py-3">Name</th>
-                        <th class="px-4 py-3">Description</th>
+                        <th class="px-4 py-3">Subscription</th>
                         <th class="px-4 py-3">Start Date</th>
-                        <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3">Membership Status</th>
                         @role('admin')
                             <th class="px-4 py-3 text-center">Actions</th>
                         @endrole

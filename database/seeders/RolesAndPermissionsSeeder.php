@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -17,31 +16,40 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         $permissions = ['create-record', 'edit-record', 'delete-record'];
 
-        foreach($permissions as $permission){
-            Permission::create(['name' => $permission]);
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
-        $dataEntry = Role::create(['name' => 'data-entry']);
-        $admin = Role::create(['name' => 'admin']);
+        // Create roles
+        $dataEntry = Role::firstOrCreate(['name' => 'data-entry']);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
 
+        // Assign permissions to roles
         $dataEntry->givePermissionTo('create-record');
         $admin->givePermissionTo($permissions);
 
-        $user1 = User::create([
-            'name' => 'admin',
+        // Create admin user if not exists
+        $adminUser = User::firstOrCreate([
             'email' => 'admin@email.com',
-            'password' => bcrypt('admin123')
+        ], [
+            'name' => 'Admin',
+            'password' => bcrypt('admin123'),
         ]);
 
-        $user2 = User::create([
-            'name' => 'data entry',
+        if (!$adminUser->hasRole('admin')) {
+            $adminUser->assignRole('admin');
+        }
+
+        // Create a predefined "data entry" user if not exists
+        $dataEntryUser = User::firstOrCreate([
             'email' => 'dataentry@email.com',
-            'password' => bcrypt('data123')
+        ], [
+            'name' => 'Data Entry',
+            'password' => bcrypt('data123'),
         ]);
 
-
-        $user1->assignRole('admin');
-        $user2->assignRole('data-entry');
-
+        if (!$dataEntryUser->hasRole('data-entry')) {
+            $dataEntryUser->assignRole('data-entry');
+        }
     }
 }

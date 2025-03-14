@@ -17,10 +17,10 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence(3), // Random project name, e.g., "Website Redesign"
-            'description' => $this->faker->paragraph(), // Random description
+            'name' => $this->faker->name,
+            'description' => $this->faker->randomElement(['Session', 'Monthly', 'Yearly', 'Walk In']),
             'start_date' => $this->faker->dateTimeThisYear(), // Random start date within this year
-            'status' => $this->faker->randomElement(['Active', 'Completed', 'On Hold', 'Cancelled']),
+            'status' => $this->faker->randomElement(['Active', 'Expired', 'None']),
         ];
     }
 }

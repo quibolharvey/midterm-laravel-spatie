@@ -10,6 +10,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    public function isAdmin()
+{
+    return $this->role === 'admin'; // Make sure this matches your database column
+}
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 

@@ -6,6 +6,14 @@
         <!-- Navigation Links -->
         <a href="{{ route('home') }}" class="text-lg hover:text-gray-300 transition">Home</a>
 
+        <a href="{{ route('members.index') }}" class="text-lg hover:text-gray-300 transition">Account List</a>
+
+        <a href="{{ route('subs.index') }}" class="text-lg hover:text-gray-300 transition">Subscription Registration</a>
+
+        <a href="{{ route('details.index') }}" class="text-lg hover:text-gray-300 transition">Subscription Details</a>
+
+
+
         @if (auth()->check())
             <!-- Logout Button -->
             <form action="{{ route('logout') }}" method="POST" class="w-full">

@@ -38,6 +38,13 @@
                     {{ session('error') }}
                 </div>
             @endif
+
+            <!-- Register Link -->
+            <div class="text-center">
+                <p class="text-gray-400 text-sm">Don't have an account? 
+                    <a href="{{ route('register') }}" class="text-blue-400 hover:underline">Register here</a>
+                </p>
+            </div>
         </form>
     </div>
 @endsection
