@@ -4,26 +4,40 @@
         <a href="{{ route('index') }}" class="text-3xl font-bold mb-3 text-white">BICEPCURL</a>
 
         <!-- Navigation Links -->
-        <a href="{{ route('home') }}" class="text-lg hover:text-gray-300 transition">Home</a>
+        <a href="{{ route('home') }}" 
+            class="text-lg transition px-2 py-1 rounded-md {{ request()->routeIs('home') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
+            Home
+        </a>
 
-        <a href="{{ route('members.index') }}" class="text-lg hover:text-gray-300 transition">Account List</a>
+        <a href="{{ route('members.index') }}" 
+            class="text-lg transition px-2 py-1 rounded-md {{ request()->routeIs('members.index') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
+            Account List
+        </a>
 
-        <a href="{{ route('subs.index') }}" class="text-lg hover:text-gray-300 transition">Subscription Registration</a>
+        <a href="{{ route('subs.index') }}" 
+            class="text-lg transition px-2 py-1 rounded-md {{ request()->routeIs('subs.index') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
+            Subscription Registration
+        </a>
 
-        <a href="{{ route('details.index') }}" class="text-lg hover:text-gray-300 transition">Subscription Details</a>
-
-
+        <a href="{{ route('details.index') }}" 
+            class="text-lg transition px-2 py-1 rounded-md {{ request()->routeIs('details.index') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
+            Subscription Details
+        </a>
 
         @if (auth()->check())
             <!-- Logout Button -->
             <form action="{{ route('logout') }}" method="POST" class="w-full">
                 @csrf
-                <button type="submit" class="w-full text-left text-lg hover:text-gray-300 transition focus:outline-none">
+                <button type="submit" 
+                    class="w-full text-left text-lg px-2 py-1 rounded-md transition {{ request()->routeIs('logout') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
                     Logout
                 </button>
             </form>
         @else
-            <a href="{{ route('login') }}" class="text-lg hover:text-gray-300 transition">Login</a>
+            <a href="{{ route('login') }}" 
+                class="text-lg transition px-2 py-1 rounded-md {{ request()->routeIs('login') ? 'bg-indigo-800 text-white' : 'hover:text-gray-300' }}">
+                Login
+            </a>
         @endif
     </div>
 
