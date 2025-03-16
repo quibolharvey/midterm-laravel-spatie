@@ -17,25 +17,33 @@ class DetailController extends Controller
     // Update subscription status to "paid"
     public function updateStatus(Request $request, $id)
 {
+    \Log::info("Update request received for ID: $id with status: " . $request->status);
+
     $subscription = Subscription::findOrFail($id);
 
-    // Ensure only admins can update
-    if (!auth()->user()->can('admin')) {
-        return redirect()->route('details.index')->with('error', 'Unauthorized action.');
-    }
-
-    // Validate status
+    // Validate the status input
     $request->validate([
         'status' => 'required|in:pending,paid,expired',
     ]);
 
-    // Update status
-    $subscription->update([
-        'status' => $request->status,
-    ]);
+    // Update the status
+    $subscription->update(['status' => $request->status]);
 
-    return redirect()->route('details.index')->with('success', 'Subscription status updated successfully.');
+    return redirect()->route('details.index')->with('success', 'Subscription status updated successfully!');
 }
+public function destroy($id)
+{
+    $subscription = Subscription::findOrFail($id);
+    $subscription->delete();
+
+    return redirect()->route('details.index')->with('success', 'Subscription deleted successfully!');
+}
+
+
+
+
+
+
 
 
 }

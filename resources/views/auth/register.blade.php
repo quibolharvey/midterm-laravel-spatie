@@ -34,6 +34,10 @@
         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg">
             Register
         </button>
+        <div class="text-center">
+                <a href="{{ route('login') }}" class="text-blue-400 hover:underline">Already have an account?</a>
+            </p>
+        </div>
 
         @if (session('error'))
             <div class="bg-red-600 text-white text-center p-2 rounded-md">

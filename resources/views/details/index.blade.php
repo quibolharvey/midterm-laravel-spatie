@@ -42,8 +42,8 @@
                     </span>
                 </td>
                 <td class="px-4 py-2">
-                    @can('admin')
-                        <form action="{{ route('details.updateStatus', $sub->id) }}" method="POST">
+                    @role('admin')
+                        <form action="{{ route('details.updateStatus', $sub->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('PATCH')
                             <select name="status" class="px-2 py-1 border rounded" onchange="this.form.submit()">
@@ -52,13 +52,24 @@
                                 <option value="expired" {{ $sub->status == 'expired' ? 'selected' : '' }}>Expired</option>
                             </select>
                         </form>
+                
+                        <!-- Delete Button -->
+                        <form action="{{ route('details.destroy', $sub->id) }}" method="POST" class="inline-block" 
+                              onsubmit="return confirm('Are you sure you want to delete this subscription?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="ml-2 bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded">
+                                Delete
+                            </button>
+                        </form>
                     @else
                         <span class="px-2 py-1 text-xs font-semibold rounded 
-                            {{ $sub->status == 'pending' ? 'bg-red-200 text-red-700' : 'bg-green-200 text-green-700' }}">
+                            {{ $sub->status == 'pending' ? 'bg-yellow-200 text-yellow-700' : ($sub->status == 'paid' ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700') }}">
                             {{ ucfirst($sub->status) }}
                         </span>
-                    @endcan
+                    @endrole
                 </td>
+                
                 
             </tr>
             @endforeach
